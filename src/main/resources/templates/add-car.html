@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th = "http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="main-layout.html">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <div th:insert="links.html"></div>
 </head>
 <body>
-    <div th:insert="nav.html"></div>
-    <div class="container mt-3">
+<div class="container mt-3">
+    <div layout:fragment="siteContent">
         <div class="row justify-content-center">
             <div class="col-6">
                 <form th:action="@{'/add-car'}" method="post">
@@ -112,5 +113,6 @@
             </div>
         </div>
     </div>
+</div>
 </body>
 </html>
