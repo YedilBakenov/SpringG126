@@ -25,4 +25,24 @@ public class DBManager {
         id++;
         cars.add(car);
     }
+
+    public static Car getCarById(int id) {
+        return cars.stream().filter(s -> s.getId()==id).findFirst().orElseThrow();
+    }
+
+    public static void updateCar(Car car) {
+        for(Car c: cars){
+            if(c.getId()==car.getId()){
+                c.setYear(car.getYear());
+                c.setVolume(car.getVolume());
+                c.setModel(car.getModel());
+                c.setPrice(car.getPrice());
+            }
+        }
+
+    }
+
+    public static void deleteCarById(int id) {
+        cars.removeIf(s->s.getId()==id);
+    }
 }

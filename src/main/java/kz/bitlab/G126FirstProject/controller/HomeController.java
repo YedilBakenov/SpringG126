@@ -5,6 +5,7 @@ import kz.bitlab.G126FirstProject.model.Car;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -44,6 +45,25 @@ public class HomeController {
 
         DBManager.addCar(car);
 
+        return "redirect:/";
+    }
+
+    @GetMapping("/car-details/{id}")
+    public String getCarDetails(@PathVariable int id,
+                                Model model){
+        model.addAttribute("car", DBManager.getCarById(id));
+        return "car-details";
+    }
+
+    @PostMapping("/update-car")
+    public String updateCar(Car car){
+        DBManager.updateCar(car);
+        return "redirect:/";
+    }
+
+    @PostMapping("/delete-car")
+    public String deleteCar(@RequestParam int id){
+        DBManager.deleteCarById(id);
         return "redirect:/";
     }
 

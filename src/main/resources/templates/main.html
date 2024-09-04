@@ -28,7 +28,7 @@
                             <td th:text="${car.year}"></td>
                             <td th:text="${car.volume}"></td>
                             <td th:text="${car.price}"></td>
-                            <td style="width: 8%"><a class="btn btn-secondary btn-sm" href="/car-details">DETAILS</a></td>
+                            <td style="width: 8%"><a class="btn btn-secondary btn-sm" th:href="@{'/car-details/' + ${car.id}}">DETAILS</a></td>
                         </tr>
                     </tbody>
                 </table>
