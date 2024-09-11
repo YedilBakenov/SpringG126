@@ -7,10 +7,12 @@
     <div th:insert="links.html"></div>
 </head>
 <body>
- <div th:insert="nav.html"></div>
-    <div class="row mt-2">
-        <div class="col-3 mt-3" th:insert="list-group.html"></div>
-        <div class="col-9" layout:fragment="siteContent"></div>
+    <div th:insert="nav.html"></div>
+    <div class="container mt-2">
+        <div class="row">
+            <div layout:fragment="content" class="col-9"></div>
+            <div th:insert="list-group.html" class="col-3"></div>
+        </div>
     </div>
 </body>
 </html>

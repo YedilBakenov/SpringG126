@@ -1,29 +1,34 @@
 package kz.bitlab.G126FirstProject.controller;
 
-import kz.bitlab.G126FirstProject.db.DBManager;
+import kz.bitlab.G126FirstProject.component.HomeComponent;
 import kz.bitlab.G126FirstProject.model.Car;
+import kz.bitlab.G126FirstProject.service.CarService;
+import kz.bitlab.G126FirstProject.service.CarService2;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class HomeController {
-    // @WebServlet(value = "/")
-    // protected void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
-    // req.setAttribute("list", DBConnection.getAllCars());
-    // req.getRequestDispatcher("/main.jsp").forward(req, res);}
+    @Autowired
+    @Qualifier("second")
+    private CarService2 carService;
+
+    @Autowired
+    private HomeComponent component;
+
     @GetMapping(value = "/")
     public String getIndex(Model model){
-        model.addAttribute("list", DBManager.getCars());
+        model.addAttribute("list", carService.getCars());
+        component.getInfo();
         return "main";
     }
 
     @PostMapping("/add-car")
     public String addCar(Car car){
-        DBManager.addCar(car);
+        carService.addCar(car);
         return "redirect:/";
     }
 
@@ -43,7 +48,7 @@ public class HomeController {
         car.setVolume(volume);
         car.setYear(year);
 
-        DBManager.addCar(car);
+        carService.addCar(car);
 
         return "redirect:/";
     }
@@ -51,19 +56,19 @@ public class HomeController {
     @GetMapping("/car-details/{id}")
     public String getCarDetails(@PathVariable int id,
                                 Model model){
-        model.addAttribute("car", DBManager.getCarById(id));
+        model.addAttribute("car", carService.getCarById(id));
         return "car-details";
     }
 
     @PostMapping("/update-car")
     public String updateCar(Car car){
-        DBManager.updateCar(car);
+        carService.updateCar(car);
         return "redirect:/";
     }
 
     @PostMapping("/delete-car")
     public String deleteCar(@RequestParam int id){
-        DBManager.deleteCarById(id);
+        carService.deleteCarById(id);
         return "redirect:/";
     }
 
