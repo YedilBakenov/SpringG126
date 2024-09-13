@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout.html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container mt-3">
+    <div layout:fragment="content">
+        <div class="row justify-content-center">
+            <div class="col-6">
+                <form th:action="@{'/add-student'}" method="post">
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <label>MODEL</label>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <input class="form-control" type="text" name="model">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <label>VOLUME</label>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <input class="form-control" type="number" name="volume">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <label>PRICE</label>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <input class="form-control" type="number" name="price">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <label>YEAR</label>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <input class="form-control" type="number" name="year">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <button class="btn btn-secondary btn-sm">ADD CAR</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <h1 style="margin-top: 20px">ANOTHER WAY TO ADD CAR</h1>
+        <div class="row justify-content-center mt-5">
+            <div class="col-6">
+                <form th:action="@{'/add-car-v2'}" method="post">
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <label>MODEL</label>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <input class="form-control" type="text" name="model">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <label>VOLUME</label>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <input class="form-control" type="number" name="volume">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <label>PRICE</label>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <input class="form-control" type="number" name="price">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <label>YEAR</label>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <input class="form-control" type="number" name="year">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <button class="btn btn-secondary btn-sm">ADD CAR</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
