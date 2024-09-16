@@ -66,4 +66,10 @@ public class StudentController {
         return "redirect:/";
     }
 
+    @GetMapping("/search")
+    public String search(@RequestParam String search,
+                         Model model){
+        model.addAttribute("list", studentService.searchByWord(search));
+        return "main2";
+    }
 }

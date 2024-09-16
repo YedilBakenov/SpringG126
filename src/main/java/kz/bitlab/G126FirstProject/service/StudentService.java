@@ -18,4 +18,7 @@ public interface StudentService {
      void updateStudent(Student student);
 
      void addStudent(Student student);
+
+     List<Student>searchByWord(String search);
+
 }

@@ -38,4 +38,9 @@ public class StudentServiceImpl implements StudentService {
     public void addStudent(Student student) {
         repository.save(student);
     }
+
+    @Override
+    public List<Student> searchByWord(String search) {
+        return repository.getAllStudentsByWord(search);
+    }
 }
