@@ -33,4 +33,8 @@ public class Student {
 
     @Column(name="BIO", columnDefinition = "text")
     private String bio;
-}
+
+    @ManyToOne
+    @JoinColumn(name = "CITY_ID")
+    private City city;
+ }

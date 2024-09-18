@@ -1,6 +1,7 @@
 package kz.bitlab.G126FirstProject.controller;
 
 import kz.bitlab.G126FirstProject.model.Student;
+import kz.bitlab.G126FirstProject.repository.CityRepository;
 import kz.bitlab.G126FirstProject.service.impl.StudentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,21 +15,25 @@ public class StudentController {
     @Autowired
     private StudentServiceImpl studentService;
 
+    @Autowired
+    private CityRepository cityRepository;
+
     @GetMapping(value = "/")
     public String getIndex(Model model){
         model.addAttribute("list", studentService.getAllStudents());
         return "main2";
     }
 
-    @PostMapping("/add-student")
-    public String addStudent(Student st){
-        studentService.addStudent(st);
-        return "redirect:/";
+    @GetMapping("/add-student")
+    public String addStudentPage(Student st, Model model){
+        model.addAttribute("cities", cityRepository.findAll());
+        return "add-student";
     }
 
-    @GetMapping("/add-student")
-    public String addStudentPage(){
-        return "add-student";
+    @PostMapping("/add-student")
+    public String addStudent(Student student){
+        studentService.addStudent(student);
+        return "redirect:/student/";
     }
 //
 //    @PostMapping("/add-car-v2")
@@ -50,6 +55,7 @@ public class StudentController {
     @GetMapping("/student-details/{id}")
     public String getCarDetails(@PathVariable int id,
                                 Model model){
+        model.addAttribute("cities", cityRepository.findAll());
         model.addAttribute("st", studentService.getStudentById(id));
         return "student-details";
     }
@@ -57,13 +63,13 @@ public class StudentController {
     @PostMapping("/update-student")
     public String updateStudent(Student st){
         studentService.updateStudent(st);
-        return "redirect:/";
+        return "redirect:/student/";
     }
 
     @PostMapping("/delete-student")
     public String deleteStudent(@RequestParam int id){
         studentService.deleteStudentById(id);
-        return "redirect:/";
+        return  "redirect:/student/";
     }
 
     @GetMapping("/search")

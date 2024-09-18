@@ -7,11 +7,12 @@
     <title>Title</title>
 </head>
 <body>
-<div class="container mt-3">
-    <div layout:fragment="content">
+<div layout:fragment="content">
+    <div class="container mt-3">
         <div class="row justify-content-center">
-            <div class="col-6">
-                <form th:action="@{'/student/add-student'}" method="post">
+            <div class="col-6" th:object="${st}">
+                <form th:action="@{'/student/update-student'}" method="post">
+                    <input type="hidden" name="id" th:value="${st.id}">
                     <div class="row mt-3">
                         <div class="col-12">
                             <label>NAME</label>
@@ -19,7 +20,7 @@
                     </div>
                     <div class="row mt-3">
                         <div class="col-12">
-                            <input class="form-control" type="text" name="name">
+                            <input class="form-control" type="text" name="name" th:value="${st.name}">
                         </div>
                     </div>
                     <div class="row mt-3">
@@ -29,7 +30,7 @@
                     </div>
                     <div class="row mt-3">
                         <div class="col-12">
-                            <input class="form-control" type="text" name="surname">
+                            <input class="form-control" type="text" name="surname" th:value="${st.surname}">
                         </div>
                     </div>
                     <div class="row mt-3">
@@ -39,7 +40,7 @@
                     </div>
                     <div class="row mt-3">
                         <div class="col-12">
-                            <input class="form-control" type="number" name="gpa">
+                            <input class="form-control" type="number" name="gpa" th:value="${st.gpa}">
                         </div>
                     </div>
                     <div class="row mt-3">
@@ -49,7 +50,7 @@
                     </div>
                     <div class="row mt-3">
                         <div class="col-12">
-                            <input class="form-control" type="number" name="age">
+                            <input class="form-control" type="number" name="age" th:value="${st.age}">
                         </div>
                     </div>
                     <div class="row mt-3">
@@ -59,19 +60,27 @@
                     </div>
                     <div class="row mt-3">
                         <div class="col-12">
-                           <select class="form-control" name="city.id">
-                               <option th:each="city: ${cities}" th:text="${city.name}" th:value="${city.id}"></option>
-                           </select>
+                            <select class="form-control" name="city.id">
+                                <option th:each="city: ${cities}" th:text="${city.name}" th:value="${city.id}" th:selected="${st.city.id==city.id}"></option>
+                            </select>
                         </div>
                     </div>
                     <div class="row mt-3">
                         <div class="col-12">
-                            <textarea class="form-control" cols="30" rows="10" name="bio"></textarea>
+                            <textarea class="form-control" cols="30" rows="10" name="bio" th:text="${st.bio}"></textarea>
                         </div>
                     </div>
-                    <div class="row mt-3">
-                        <div class="col-12">
-                            <button class="btn btn-secondary btn-sm">ADD STUDENT</button>
+                    <div class="row">
+                        <div class="col-12 mt-2">
+                            <button class="btn btn-success btn-sm">UPDATE STUDENT</button>
+                        </div>
+                    </div>
+                </form>
+                <form th:action="@{'/student/delete-student'}" method="post">
+                    <input type="hidden" name="id" th:value="${st.id}">
+                    <div class="row">
+                        <div class="col-12 mt-2">
+                            <button class="btn btn-danger btn-sm">DELETE STUDENT</button>
                         </div>
                     </div>
                 </form>

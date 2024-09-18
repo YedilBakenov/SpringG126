@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="layout.html">
+      layout:decorate="main-layout.html">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -24,6 +24,7 @@
                         <th>AGE</th>
                         <th>GPA</th>
                         <th>BIO</th>
+                        <th>CITY</th>
                         <th>DETAILS</th>
                     </tr>
                     </thead>
@@ -35,7 +36,9 @@
                         <td th:text="${student.age}"></td>
                         <td th:text="${student.gpa}"></td>
                         <td th:text="${student.bio}"></td>
-                        <!--                            <td style="width: 8%"><a class="btn btn-secondary btn-sm" th:href="@{'/car-details/' + ${car.id}}">DETAILS</a></td>-->
+                        <td th:text="${student.city.name}"></td>
+                        <td style="width: 8%"><a class="btn btn-secondary btn-sm" th:href="@{'/student/student-details/' + ${student.id}}">DETAILS</a></td>
+
                     </tr>
                     </tbody>
                 </table>
