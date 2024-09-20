@@ -1,7 +1,9 @@
 package kz.bitlab.G126FirstProject.controller;
 
 import kz.bitlab.G126FirstProject.model.Student;
+import kz.bitlab.G126FirstProject.model.Subject;
 import kz.bitlab.G126FirstProject.repository.CityRepository;
+import kz.bitlab.G126FirstProject.repository.SubjectRepository;
 import kz.bitlab.G126FirstProject.service.impl.StudentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,9 @@ public class StudentController {
 
     @Autowired
     private CityRepository cityRepository;
+
+    @Autowired
+    private SubjectRepository subjectRepository;
 
     @GetMapping(value = "/")
     public String getIndex(Model model){
@@ -55,8 +60,14 @@ public class StudentController {
     @GetMapping("/student-details/{id}")
     public String getCarDetails(@PathVariable int id,
                                 Model model){
+        var student = studentService.getStudentById(id);
+        var subjects = subjectRepository.findAll();
+
+        subjects.removeAll(student.getSubjects());
+
         model.addAttribute("cities", cityRepository.findAll());
         model.addAttribute("st", studentService.getStudentById(id));
+        model.addAttribute("subjects", subjects);
         return "student-details";
     }
 
@@ -78,4 +89,34 @@ public class StudentController {
         model.addAttribute("list", studentService.searchByWord(search));
         return "main2";
     }
+
+    @PostMapping("/delete-subject")
+    public String deleteSubject(@RequestParam int subject_id,
+                                @RequestParam int student_id){
+
+        Subject subject = subjectRepository.findById(subject_id).orElseThrow();
+        Student student = studentService.getStudentById(student_id);
+
+        student.getSubjects().remove(subject);
+
+        studentService.updateStudent(student);
+
+        return  "redirect:/student/student-details/" + student_id;
+    }
+
+    @PostMapping("/add-subject")
+    public String addSubject(@RequestParam int subject_id,
+                                @RequestParam int student_id){
+
+        Subject subject = subjectRepository.findById(subject_id).orElseThrow();
+        Student student = studentService.getStudentById(student_id);
+
+        student.getSubjects().add(subject);
+
+        studentService.updateStudent(student);
+
+        return  "redirect:/student/student-details/" + student_id;
+    }
+
+
 }

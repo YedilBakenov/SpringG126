@@ -7,6 +7,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -37,4 +40,7 @@ public class Student {
     @ManyToOne
     @JoinColumn(name = "CITY_ID")
     private City city;
+
+    @ManyToMany
+    private List<Subject> subjects = new ArrayList<>();
  }
