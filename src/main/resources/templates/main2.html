@@ -37,11 +37,45 @@
                         <td th:text="${student.gpa}"></td>
                         <td th:text="${student.bio}"></td>
                         <td th:text="${student.city.name}"></td>
-                        <td style="width: 8%"><a class="btn btn-secondary btn-sm" th:href="@{'/student/student-details/' + ${student.id}}">DETAILS</a></td>
-
+                        <td style="width: 8%"><a class="btn btn-secondary btn-sm"
+                                                 th:href="@{'/student/student-details/' + ${student.id}}">DETAILS</a>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
+            </div>
+            <div class="mt-3">
+                <form th:action="@{'/student/add-teacher'}" method="post">
+                    <div class="row">
+                        <div class="col-12">
+                            <label>
+                                NAME
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <input class="form-control" name="name">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <label>
+                                SURNAME
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <input class="form-control" name="surname">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <button class="btn btn-success btn-sm">ADD TEACHER</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

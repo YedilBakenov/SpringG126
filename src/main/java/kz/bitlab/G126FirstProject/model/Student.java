@@ -2,10 +2,7 @@ package kz.bitlab.G126FirstProject.model;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +13,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "students")
+@Builder
+@ToString
 public class Student {
 
     @Id
@@ -42,5 +41,6 @@ public class Student {
     private City city;
 
     @ManyToMany
+    @ToString.Exclude
     private List<Subject> subjects = new ArrayList<>();
  }

@@ -2,8 +2,10 @@ package kz.bitlab.G126FirstProject.controller;
 
 import kz.bitlab.G126FirstProject.model.Student;
 import kz.bitlab.G126FirstProject.model.Subject;
+import kz.bitlab.G126FirstProject.model2.Teacher;
 import kz.bitlab.G126FirstProject.repository.CityRepository;
 import kz.bitlab.G126FirstProject.repository.SubjectRepository;
+import kz.bitlab.G126FirstProject.repository2.TeacherRepository;
 import kz.bitlab.G126FirstProject.service.impl.StudentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,9 +25,14 @@ public class StudentController {
     @Autowired
     private SubjectRepository subjectRepository;
 
+    @Autowired
+    private TeacherRepository teacherRepository;
+
     @GetMapping(value = "/")
     public String getIndex(Model model){
         model.addAttribute("list", studentService.getAllStudents());
+        Student student = Student.builder().age(20).gpa(2.2).build();
+        System.out.println(student);
         return "main2";
     }
 
@@ -38,6 +45,12 @@ public class StudentController {
     @PostMapping("/add-student")
     public String addStudent(Student student){
         studentService.addStudent(student);
+        return "redirect:/student/";
+    }
+
+    @PostMapping("/add-teacher")
+    public String addTeacher(Teacher teacher){
+        teacherRepository.save(teacher);
         return "redirect:/student/";
     }
 //
